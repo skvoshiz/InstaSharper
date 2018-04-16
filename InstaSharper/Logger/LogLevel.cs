@@ -7,7 +7,6 @@
         Info = 2,
         Request = 3,
         Response = 4,
-        All = 5,
-
+        All = 5
     }
 }
