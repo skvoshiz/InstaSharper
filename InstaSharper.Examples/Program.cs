@@ -33,15 +33,15 @@ namespace InstaSharper.Examples
                 // create user session data and provide login details
                 var userSession = new UserSessionData
                 {
-                    UserName = "username",
-                    Password = "password"
+                    UserName = "skvoshizz",
+                    Password = "VasyanPro141196"
                 };
 
                 var delay = RequestDelay.FromSeconds(2, 2);
                 // create new InstaApi instance using Builder
                 _instaApi = InstaApiBuilder.CreateBuilder()
                     .SetUser(userSession)
-                    .UseLogger(new DebugLogger(LogLevel.Exceptions)) // use logger for requests and debug messages
+                    .UseLogger(new DebugLogger(LogLevel.All)) // use logger for requests and debug messages
                     .SetRequestDelay(delay)
                     .Build();
                 //// create account
@@ -68,7 +68,7 @@ namespace InstaSharper.Examples
                     Console.WriteLine(e);
                 }
 
-                if (!_instaApi.IsUserAuthenticated)
+                while (!_instaApi.IsUserAuthenticated)
                 {
                     // login
                     Console.WriteLine($"Logging in as {userSession.UserName}");
@@ -78,6 +78,11 @@ namespace InstaSharper.Examples
                     if (!logInResult.Succeeded)
                     {
                         Console.WriteLine($"Unable to login: {logInResult.Info.Message}");
+                        if (logInResult.Info.Message == "challenge_required")
+                        {
+                            await Task.Delay(10000);
+                            continue;
+                        }
                         return false;
                     }
                 }
@@ -108,7 +113,7 @@ namespace InstaSharper.Examples
                     [ConsoleKey.D6] = new Messaging(_instaApi),
                     [ConsoleKey.D7] = new LocationSample(_instaApi),
                     [ConsoleKey.D8] = new CollectionSample(_instaApi),
-                    [ConsoleKey.D9] = new UploadVideo(_instaApi)
+                    //[ConsoleKey.D9] = new UploadVideo(_instaApi)
 
 
                 };

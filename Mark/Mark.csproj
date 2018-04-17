@@ -96,5 +96,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InstaSharper.Examples\InstaSharper.Examples.csproj">
+      <Project>{620d3db5-5636-4a54-a7d7-600c6518c20e}</Project>
+      <Name>InstaSharper.Examples</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InstaSharper\InstaSharper.csproj">
+      <Project>{449a948d-cc65-4d1a-8159-6fa232f972d9}</Project>
+      <Name>InstaSharper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
